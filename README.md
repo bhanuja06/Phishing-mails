@@ -1,4 +1,4 @@
-# **Phishing Email Analysis Toolkit**  
+# **Phishing Email Analysis Toolkit** 
 
 🔍 A hands-on examination of phishing techniques using a simulated Amazon scam email  
 
