@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Amazon Order Cancellation Phishing Email Analysis</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background-color: #131a22;
+      color: #e1e5eb;
+      line-height: 1.6;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #0d1218 0%, #232f3e 100%);
+      color: #f0f2f5;
+      padding: 1.5em;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border-bottom: 2px solid #ff9900;
+    }
+    
+    header h1 {
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    
+    .container {
+      display: flex;
+      padding: 25px;
+      gap: 25px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .email-pane {
+      flex: 1;
+      background: #1a222d;
+      border: 1px solid #2c3a4a;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .email-pane h2 {
+      margin-top: 0;
+      color: #ff9900;
+      border-bottom: 1px solid #2c3a4a;
+      padding-bottom: 10px;
+    }
+    
+    .analysis-pane {
+      flex: 2;
+      background: #1a222d;
+      border: 1px solid #2c3a4a;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .section {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px dashed #2c3a4a;
+    }
+    
+    .section:last-child {
+      border-bottom: none;
+    }
+    
+    .section h3 {
+      color: #ff9900;
+      margin-top: 0;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+    }
+    
+    .section h3:before {
+      content: "⚠️";
+      margin-right: 10px;
+      font-size: 1em;
+    }
+    
+    code {
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: "Courier New", monospace;
+      color: #ff4d4d;
+      border: 1px solid rgba(255, 77, 77, 0.25);
+      display: inline-block;
+      margin: 3px 0;
+    }
+    
+    .phish-header {
+      font-weight: bold;
+      color: #ff9900;
+    }
+    
+    a {
+      color: #3a7bd5;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    a:hover {
+      color: #ff9900;
+      text-decoration: underline;
+    }
+    
+    hr {
+      border: none;
+      height: 1px;
+      background-color: #2c3a4a;
+      margin: 20px 0;
+    }
+    
+    ul {
+      padding-left: 20px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+      position: relative;
+    }
+    
+    li:before {
+      content: "•";
+      color: #ff9900;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+    
+    .conclusion {
+      background: rgba(255, 153, 0, 0.1);
+      border-left: 4px solid #ff9900;
+      padding: 15px;
+      border-radius: 0 4px 4px 0;
+      margin-top: 20px;
+    }
+    
+    .conclusion strong {
+      color: #ff9900;
+    }
+    
+    .verify-btn {
+      display: inline-block;
+      background: #ff9900;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 4px;
+      text-decoration: none;
+      margin: 10px 0;
+    }
+    
+    .verify-btn:hover {
+      background: #e68a00;
+    }
+    
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+      
+      .email-pane {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Phishing Email Analysis – Amazon Order Cancellation Scam</h1>
+  </header>
+  <div class="container">
+    <div class="email-pane">
+      <h2>Email Preview</h2>
+      <p><span class="phish-header">From:</span> Amazon Head Office &lt;contact@usps.com&gt;</p>
+      <p><span class="phish-header">Subject:</span> Amazon - Your Order Has Been Cancelled</p>
+      <p><span class="phish-header">Time:</span> 3:13 am</p>
+      <hr>
+      <p>Dear Amazon Customer</p>
+      <p>Your recent order on AMAZON.COM has been canceled due to fraudulent activity detected by our automatic systems. Your account has been suspended on a temporary basis.</p>
+      <p>You're requested to activate your account by verifying your email address.</p>
+      <p>Please visit <a href="http://phishing-site-example.com/amazon-verify-account">amazon.com/verify-my-account</a></p>
+      <p>Or</p>
+      <p>Please click on the button below</p>
+      <p><a href="http://phishing-site-example.com/amazon-verify-account" class="verify-btn">Verify Email</a></p>
+      <p>Amazon.com © 2019 | All Rights Reserved</p>
+    </div>
+
+    <div class="analysis-pane">
+      <div class="section">
+        <h3>Sender Email Mismatch</h3>
+        <p>The email claims to be from "Amazon Head Office" but uses a USPS (United States Postal Service) email address: <code>contact@usps.com</code>. This is a clear red flag as Amazon would never use a USPS email address for customer communications.</p>
+      </div>
+
+      <div class="section">
+        <h3>Suspicious Timing</h3>
+        <p>The email was sent at <code>3:13 am</code>, which is an unusual time for legitimate business communications. Most automated emails from large companies are sent during normal business hours.</p>
+      </div>
+
+      <div class="section">
+        <h3>Urgent Account Suspension Claim</h3>
+        <p>The message claims your account has been "suspended on a temporary basis" due to fraudulent activity, creating a sense of urgency. This is a common phishing tactic to prompt immediate action without proper scrutiny.</p>
+      </div>
+
+      <div class="section">
+        <h3>Deceptive Verification Links</h3>
+        <p>The email provides two links that both point to <code>phishing-site-example.com</code> despite displaying as "amazon.com/verify-my-account". Hovering over these links would reveal their true malicious destination.</p>
+        <p>Actual link destinations:
+          <br><code>http://phishing-site-example.com/amazon-verify-account</code>
+        </p>
+      </div>
+
+      <div class="section">
+        <h3>Outdated Copyright Information</h3>
+        <p>The footer shows <code>© 2019</code> which is outdated for a supposedly current email. Legitimate companies typically update their copyright year automatically.</p>
+      </div>
+
+      <div class="section">
+        <h3>Generic Greeting</h3>
+        <p>The email uses a generic "Dear Amazon Customer" instead of addressing you by name, which is unusual for legitimate Amazon communications that typically include your name.</p>
+      </div>
+
+      <div class="section">
+        <h3>Phishing Traits Summary</h3>
+        <ul>
+          <li>Mismatched sender information (Amazon claim from USPS email)</li>
+          <li>Unusual sending time (3:13 am)</li>
+          <li>Creates false urgency with account suspension claim</li>
+          <li>Malicious links disguised as legitimate Amazon URLs</li>
+          <li>Both text link and button point to phishing site</li>
+          <li>Outdated copyright information</li>
+          <li>Generic greeting instead of personalized</li>
+          <li>Request for account verification (common phishing tactic)</li>
+        </ul>
+        <div class="conclusion">
+          <p><strong>Conclusion:</strong> This is a phishing email attempting to steal Amazon account credentials by creating a false sense of urgency and using deceptive links. Never click on verification links in unsolicited emails - always navigate to Amazon's website directly through your browser.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
